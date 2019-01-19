@@ -250,33 +250,28 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
 }
 
-
-client.on('message', message => {
-    if (message.content === '^help') {
-        let helpEmbed = new Discord.RichEmbed()
-        .setTitle('**أوامر الميوزك...**')
-        .setDescription('**برفكس البوت (^)**')
-        .addField('play', 'لتشغيل اغنية')
-        .addField('join', 'دخول رومك الصوتي')
-        .addField('disconnect', 'الخروج من رومك الصوتي')
-        .addField('skip', 'تخطي الأغنية')
-        .addField('pause', 'ايقاف الاغنية مؤقتا')
-        .addField('resume', 'تكملة الاغنية')
-        .addField('queue', 'اظهار قائمة التشغيل')
-        .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
-      message.channel.send(helpEmbed);
-    }
-});
-
-client.on('message', message => {
-    if (message.content === 'general_commands') {
-        let helpEmbed = new Discord.RichEmbed()
-        .setTitle('**أوامر عامة...**')
-        .addField('avatar', "افاتار الشخص المطلوب")
-        .addField('gif', 'البحث عن جيف انت تطلبه')
-        .addField('ping', 'معرفة ping البوت')
-      message.channel.send(helpEmbed);
-    }
+ client.on("message", message => {
+  var prefix = "*";
+if (message.content === "^^help") {
+   message.channel.send('*اذا كان الخاص مقفل لا يمكن بعت الاوامر*');
+const embed = new Discord.RichEmbed()
+    .setDescription(`
+   [❖═══════ اوامر الميوزك 🎧  ═══════❖]
+:arrow_right: ** ^^play ~ لتشغيل اغنية **
+:arrow_right: ** ^^join ~ لدخو رومك صوتي  **
+:arrow_right: ** ^^disconnect ~ خروج من الروم الصوتي **
+:arrow_right: ** ^^skip ~  لتخطي الاغنية **
+:arrow_right: ** ^^pause  ~ ايقاف الاغنية مؤقتان** 
+:arrow_right: ** ^^resume  ~  تكملة الاغنية ** 
+:arrow_right: ** ^^queue  ~  اظهار قائمة التشغيل ** 
+:arrow_right: ** ^^np  ~ اظهار الاغنية اللي انت مشغلها حاليا** 
+   [❖═══════ مميزات البوت :robot: ═══════❖]
+**يعمل 24 ساعه بدون توقف الا في حالة صيانه**
+**وسرعة البوت سريعه جدا KiLLerGamez Communty ℘ علي خادم**
+`)
+ message.author.sendEmbed(embed)
+ 
+ }
 });
 
 client.on('ready', () => {
@@ -286,7 +281,7 @@ client.on('ready', () => {
       console.log(`ON ${client.guilds.size} Servers '     Script By : EX Clan ' `);
     console.log(`----------------`);
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`!~[ Čømmäñđš l ^help]~!`,"http://twitch.tv/Death Shop")
+client.user.setGame(`!~[ Čømmäñđš l ^^help]~!`,"http://twitch.tv/Death Shop")
 client.user.setStatus("dnd")
 });
 const adminprefix = "*";
