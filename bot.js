@@ -20,7 +20,7 @@ const gif = require("gif-search");
 
 const client = new Discord.Client({disableEveryone: true});
 
-const prefix = "^";
+const prefix = "^^";
 /////////////////////////
 ////////////////////////
 ////////////////////////
@@ -268,6 +268,10 @@ const embed = new Discord.RichEmbed()
 :arrow_right: ** ^^resume  ~  تكملة الاغنية ** 
 :arrow_right: ** ^^queue  ~  اظهار قائمة التشغيل ** 
 :arrow_right: ** ^^np  ~ اظهار الاغنية اللي انت مشغلها حاليا** 
+[❖═══════ اوامر اخري═══════❖]
+:arrow_right: ** ^^inv ~ لارسال رابط دعوه البوت **
+:arrow_right: ** ^^bot ~ لعرض معلومات عن بوت **
+:arrow_right: ** ^^suppport ~ لارسال رابط سيرفر خادم بوت **
 `)
  message.author.sendEmbed(embed)
  
@@ -318,6 +322,44 @@ if (message.content.startsWith(adminprefix + 'st')) {
     message.channel.sendMessage(`**:white_check_mark:   ${argresult}**`)
 }
 
+});
+client.on('message', msg => {
+  if (msg.content === '^^suppport') {
+    msg.reply('السيرفر للمساعده,https://discord.gg/NwX2bJF');
+  }
+});
+client.on('message' , message => {
+ 
+    if (message.content === "^inv") {
+        message.reply(`تم ارساله الرابط في الخاص`)
+        if(!message.channel.guild) return message.reply('**الآمر فقط في السيرفرات**');
+     const embed = new Discord.RichEmbed()
+ .setColor("RANDOM")
+ .setThumbnail(client.user.avatarURL)    
+ .setDescription("Add me" + `
+ **
+رابط البوت |
+https://discordapp.com/api/oauth2/authorize?client_id=536143171588063242&permissions=8&scope=bot **
+`);
+  message.author.sendEmbed(embed);
+   }
+});
+client.on('message', message => {
+    if (message.content === ('^^bot')) {
+    message.channel.send({
+        embed: new Discord.RichEmbed()
+            .setAuthor(client.user.username,client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL)
+            .setColor('RANDOM')
+            .addField('**Bot Ping**🚀 :' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+            .addField('**Servers**📚 :', [client.guilds.size], true)
+            .addField('**Channels**📝 :' , `[ ${client.channels.size} ]` , true)
+            .addField('**Users**🔮 :' ,`[ ${client.users.size} ]` , true)
+            .addField('**Bot Name**🔰 :' , `[ ${client.user.tag} ]` , true)
+            .addField('**Bot Owner**👑 :' , `[<@534808591731785779>]` , true)
+            .setFooter(message.author.username, message.author.avatarURL)
+    })
+}
 });
 
 client.login(process.env.BOT_TOKEN);
